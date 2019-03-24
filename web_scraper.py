@@ -14,7 +14,7 @@ mongo_connect = database['onion']
 
 links = requests.get('https://www.theonion.com/c/news-in-brief')
 soup2 = BeautifulSoup(links.text, 'lxml')
-count = 0
+
 
 def scrape(soup_object):
     '''
@@ -32,22 +32,17 @@ def scrape(soup_object):
     for idx, x in enumerate(linkers):
         https.append(linkers[idx].a['href'])
     for link in https:
-        onion = {}
+        onions = {}
         page = requests.get(link)
         soup = BeautifulSoup(page.text, 'lxml')
         content = soup.find_all('div', {'class':'post-content entry-content js_entry-content '})[0].text
-        onion[link] = content[0:-13]
-        mongo_connect.insert_one(onion)
+        onions[link] = content[0:-13]
+        mongo_connect.insert_one(onions)
         time.sleep(20)
 
-        count += 1
+        
     button = soup2.find_all('div', {'class': 'sc-1uzyw0z-0 kiwkfc'})
     more_button = button[0].a['href']
     return 'https://www.theonion.com/c/news-in-brief' + more_button
 
 scrape(soup2)
-
-
-
-
-    
