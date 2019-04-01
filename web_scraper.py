@@ -10,7 +10,7 @@ import argparse
 
 client = MongoClient()
 database = client['capstone']   # Database name
-mongo_connect = database['onion_trash']
+mongo_connect = database['onion_articles']
 
 
 def scrape(start_link):
