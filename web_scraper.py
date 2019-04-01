@@ -39,7 +39,7 @@ def scrape(start_link):
         soup = requests.get(link)
         # Going to pull 10,000 articles. This if statement will end the
         # function once the cound reaches 10,000
-        if count < 20:
+        if count < 10000:
         # Turns html code from artilce page into beautiful soup object
             soup2 = BeautifulSoup(soup.text, 'lxml')
         # Uses the 'h1' tag to find all of the links for the 20 articles
